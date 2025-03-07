@@ -1,0 +1,102 @@
+Criar um projeto React:
+
+npx create-react-app board-frontend
+
+cd board-frontend
+
+npm install axios react-router-dom
+
+Criar um serviço para consumir a API:
+
+import axios from "axios";
+
+
+
+const API_URL = "http://localhost:8080/api/tarefas";
+
+
+
+export const getTarefas = (usuarioId) => axios.get(`${API_URL}/${usuarioId}`);
+
+export const criarTarefa = (tarefa) => axios.post(API_URL, tarefa);
+
+export const excluirTarefa = (id) => axios.delete(`${API_URL}/${id}`);
+
+Criar um Kanban Board:
+
+import React, { useEffect, useState } from "react";
+
+import { getTarefas, criarTarefa, excluirTarefa } from "./api";
+
+
+
+const Board = ({ usuarioId }) => {
+
+  const [tarefas, setTarefas] = useState([]);
+
+
+
+  useEffect(() => {
+
+    getTarefas(usuarioId).then(response => setTarefas(response.data));
+
+  }, [usuarioId]);
+
+
+
+  return (
+
+    <div className="board">
+
+      <div className="column">
+
+        <h2>A Fazer</h2>
+
+        {tarefas.filter(t => t.status === "A_FAZER").map(t => (
+
+          <div key={t.id}>
+
+            {t.titulo}
+
+            <button onClick={() => excluirTarefa(t.id)}>Excluir</button>
+
+          </div>
+
+        ))}
+
+      </div>
+
+      <div className="column">
+
+        <h2>Em Progresso</h2>
+
+        {tarefas.filter(t => t.status === "EM_PROGRESSO").map(t => (
+
+          <div key={t.id}>{t.titulo}</div>
+
+        ))}
+
+      </div>
+
+      <div className="column">
+
+        <h2>Concluído</h2>
+
+        {tarefas.filter(t => t.status === "CONCLUIDO").map(t => (
+
+          <div key={t.id}>{t.titulo}</div>
+
+        ))}
+
+      </div>
+
+    </div>
+
+  );
+
+};
+
+
+
+export default Board;
+
