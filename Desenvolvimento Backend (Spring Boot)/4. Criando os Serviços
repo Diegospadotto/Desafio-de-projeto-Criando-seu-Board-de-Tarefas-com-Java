@@ -1,0 +1,33 @@
+@Service
+
+public class TarefaService {
+
+    @Autowired
+
+    private TarefaRepository tarefaRepository;
+
+
+
+    public List<Tarefa> listarTarefas(Long usuarioId) {
+
+        return tarefaRepository.findByUsuarioId(usuarioId);
+
+    }
+
+
+
+    public Tarefa criarTarefa(Tarefa tarefa) {
+
+        return tarefaRepository.save(tarefa);
+
+    }
+
+
+
+    public void excluirTarefa(Long id) {
+
+        tarefaRepository.deleteById(id);
+
+    }
+
+}
