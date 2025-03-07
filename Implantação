@@ -1,0 +1,44 @@
+Criando um Dockerfile
+
+Backend:
+
+FROM openjdk:17
+
+COPY target/backend.jar app.jar
+
+ENTRYPOINT ["java", "-jar", "/app.jar"]
+
+Frontend:
+
+FROM node:18
+
+WORKDIR /app
+
+COPY . .
+
+RUN npm install && npm run build
+
+CMD ["npm", "start"]
+
+Criando docker-compose.yml
+
+version: '3'
+
+services:
+
+  backend:
+
+    build: ./backend
+
+    ports:
+
+      - "8080:8080"
+
+  frontend:
+
+    build: ./frontend
+
+    ports:
+
+      - "3000:3000"
+
