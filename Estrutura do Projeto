@@ -1,0 +1,14 @@
+task-board/
+│── backend/ (Spring Boot)
+│   ├── src/main/java/com/taskboard/
+│   │   ├── controller/
+│   │   ├── service/
+│   │   ├── repository/
+│   │   ├── model/
+│   │   ├── dto/
+│   │   └── config/
+│   ├── src/main/resources/
+│   ├── pom.xml
+│── frontend/ (React.js ou Angular)
+│── docker-compose.yml
+│── README.md
