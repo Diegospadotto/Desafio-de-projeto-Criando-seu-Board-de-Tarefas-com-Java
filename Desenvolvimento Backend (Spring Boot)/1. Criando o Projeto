@@ -1,0 +1,14 @@
+Use o Spring Initializr (https://start.spring.io/) com as dependências:
+
+•	Spring Web
+
+•	Spring Data JPA
+
+•	Spring Security
+
+•	Spring Boot DevTools
+
+•	Lombok
+
+•	PostgreSQL Driver
+
