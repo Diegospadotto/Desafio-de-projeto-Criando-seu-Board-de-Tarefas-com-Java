@@ -1,0 +1,46 @@
+@RestController
+
+@RequestMapping("/api/tarefas")
+
+@CrossOrigin(origins = "*")
+
+public class TarefaController {
+
+    @Autowired
+
+    private TarefaService tarefaService;
+
+
+
+    @GetMapping("/{usuarioId}")
+
+    public List<Tarefa> listarTarefas(@PathVariable Long usuarioId) {
+
+        return tarefaService.listarTarefas(usuarioId);
+
+    }
+
+
+
+    @PostMapping
+
+    public ResponseEntity<Tarefa> criarTarefa(@RequestBody Tarefa tarefa) {
+
+        return ResponseEntity.ok(tarefaService.criarTarefa(tarefa));
+
+    }
+
+
+
+    @DeleteMapping("/{id}")
+
+    public ResponseEntity<Void> excluirTarefa(@PathVariable Long id) {
+
+        tarefaService.excluirTarefa(id);
+
+        return ResponseEntity.noContent().build();
+
+    }
+
+}
+
